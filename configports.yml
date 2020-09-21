@@ -1,0 +1,20 @@
+---
+- name: Configure Router & SW
+  hosts: 192.168.150.10
+  gather_facts: false
+
+  tasks:
+    - name: configure ethernet port
+      ios_config:
+        authorize: yes         
+        lines:
+          - "{{port_num}}"
+          - "{{Description}}"  
+#         - "{{duplex}}   
+#         - switchport mode access
+#         - switchport access vlan 12 
+          - no shut
+
+      register: print_output
+
+    - debug: var=print_output
